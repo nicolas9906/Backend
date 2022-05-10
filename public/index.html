@@ -42,7 +42,7 @@
 
             const body = {id_token: response.credential};
 
-            fetch('http://localhost:4000/api/auth/google',{
+            fetch('https://backendv.herokuapp.com/api/auth/google',{
                method: 'POST',
                headers: {
                    'Content-Type':'application/json'
