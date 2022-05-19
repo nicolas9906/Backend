@@ -2,12 +2,12 @@ const { response } = require('express');
 const bcryptjs = require('bcryptjs')
 
 const Usuario = require('../models/usuario');
-
 const { generarJWT } = require('../helpers/generar-jwt');
 const { googleVerify } = require('../helpers/google.verify');
 const { json } = require('express/lib/response');
 const { signal } = require('nodemon/lib/config/defaults');
 const { DefaultTransporter } = require('google-auth-library');
+const usuario = require('../models/usuario');
 
 
 const login = async(req, res = response) => {
@@ -43,7 +43,8 @@ const login = async(req, res = response) => {
         const token = await generarJWT( usuario.id );
 
         res.json({
-            usuario,
+            ok:true,
+           usuario,
             token
         })
 
@@ -68,7 +69,6 @@ const googleSignin = async (req,res = response) =>{
         if ( !usuario ) {
             // Tengo que crearlo
             const data = {
-                nombre,
                 correo,
                 rol:'USER_ROLE',
                 password: ':P',
@@ -93,6 +93,8 @@ const googleSignin = async (req,res = response) =>{
         
         res.json({
             usuario,
+            correo,
+            rol,
             token
         });
         
@@ -109,7 +111,28 @@ const googleSignin = async (req,res = response) =>{
 
 }
 
+
+const revalidarToken = async (req, res = response) =>{
+
+    const {usuario} = req;
+
+    //generear jwt
+
+    const token= await generarJWT( usuario);
+
+    res.json({
+        ok:true,
+        usuario,
+        token
+    })
+
+}
+
+
+
+
 module.exports = {
     login,
-    googleSignin
+    googleSignin,
+    revalidarToken
 }
