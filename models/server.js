@@ -12,8 +12,9 @@ class Server {
 
         this.paths = {
             auth:'/api/auth',
-            Videobeam:'/api/Videobeam',
-            usuarios: '/api/usuarios'
+            prestamo:'/api/prestamo',
+            usuarios: '/api/usuarios',
+            agregar:'/api/agregar'
 
         }
         // this.usuariosPath = '/api/usuarios';
@@ -52,7 +53,8 @@ class Server {
         
         this.app.use( this.paths.auth, require('../routes/auth'));
         this.app.use( this.paths.usuarios, require('../routes/usuarios'));
-        this.app.use( this.paths.Videobeam, require('../routes/Videobeam'));
+        this.app.use( this.paths.prestamo, require('../routes/prestamo'));
+        this.app.use( this.paths.agregar, require('../routes/agregar'));
     }
 
     listen() {

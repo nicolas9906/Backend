@@ -10,6 +10,7 @@ const { DefaultTransporter } = require('google-auth-library');
 const usuario = require('../models/usuario');
 
 
+
 const login = async(req, res = response) => {
 
     const { correo, password } = req.body;
@@ -40,11 +41,14 @@ const login = async(req, res = response) => {
         }
 
         // Generar el JWT
-        const token = await generarJWT( usuario.id );
+        const token = await generarJWT( usuario.id,usuario.nombre,usuario.rol );
 
         res.json({
             ok:true,
-           usuario,
+            msg:'que pasa',
+            uid:usuario.id,
+            nombre:usuario.nombre,
+            rol:usuario.rol,
             token
         })
 
@@ -114,15 +118,18 @@ const googleSignin = async (req,res = response) =>{
 
 const revalidarToken = async (req, res = response) =>{
 
-    const {usuario} = req;
+    const {uid,usuario,nombre,rol} = req;
+    console.log(usuario.nombre);
 
     //generear jwt
 
-    const token= await generarJWT( usuario);
+    const token= await generarJWT(usuario.id,usuario.nombre,usuario.rol);
 
     res.json({
         ok:true,
-        usuario,
+       uid: usuario.id,
+       nombre: usuario.nombre,
+       rol:usuario.rol,
         token
     })
 

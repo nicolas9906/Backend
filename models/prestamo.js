@@ -2,20 +2,29 @@ const { Schema, model } = require('mongoose');
 
 const PrestamoSchema = Schema({
     
-    video_Id: {
+    nombrevideo: {
         type: String,
-        required: [true, 'El nombre es obligatorio']
+        required: [true, 'El id del videobeam es obligatorio']
     },
     fechaInicio: {
-        type: String,
-        required: [true, 'Fecha de inicio obligatorio']
+        type: Date,
+        required: true
     },
     fechaFin: {
-        type: String,
-        required: [true, 'Fecha fin obligatorio']
+        type: Date,
+        required: true
     },
+    estado: {
+        type: Boolean,
+        default: true
+    },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'Usuario',
+        required: true
+    }
     
-});
+}); 
 
 PrestamoSchema.method('toJSON', function() {
     const { __v, _id, ...object } = this.toObject();
