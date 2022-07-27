@@ -6,17 +6,17 @@ const PrestamoSchema = Schema({
         type: String,
         required: [true, 'El id del videobeam es obligatorio']
     },
-    fechaInicio: {
+    start: {
         type: Date,
         required: true
     },
-    fechaFin: {
+    end: {
         type: Date,
         required: true
     },
     estado: {
         type: Boolean,
-        default: true
+        default: false
     },
     user: {
         type: Schema.Types.ObjectId,

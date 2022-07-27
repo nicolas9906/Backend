@@ -30,7 +30,7 @@ const crearAgregar = async( req, res=response)=>{
         res.json({
             ok:true,
             msg:'se agrego?',
-            prestamo: agregarGuardado
+            agregar: agregarGuardado
         })
 
     } catch (error){
@@ -49,9 +49,9 @@ const actualizarAgregar = async(req,res = response) =>{
     const uid=req.uid;
 
     try {
-        const evento = await Agregar.findById(agregarId);
+        const agregar = await Agregar.findById(agregarId);
         
-        if(!evento){
+        if(!agregar){
             return res.status(404).json({
                 ok:false,
                 msg:'agregar no existe con ese id'

@@ -24,9 +24,8 @@ router.get('/',getPrestamo);
 
 router.post('/',[
     check('nombrevideo', 'El nombre de usuario es obligatorio').not().isEmpty(),
-    check('nombre','nombre de usuario obligatorio').not().isEmpty(),
-    check('fechaInicio', 'Fecha de inicio obligatoria').custom(isDate),
-    check('fechaFin','fecha de fin es obligatoria').custom(isDate),
+    check('start', 'Fecha de inicio obligatoria').custom(isDate),
+    check('end','fecha de fin es obligatoria').custom(isDate),
     validarCampos
 ],
 crearPrestamo)   
@@ -36,9 +35,9 @@ crearPrestamo)
 router.put(
     '/:id',
    [ check('nombrevideo', 'El nombre de usuario es obligatorio').not().isEmpty(),
-    check('nombre','nombre de usuario obligatorio').not().isEmpty(),
-    check('fechaInicio', 'Fecha de inicio obligatoria').custom(isDate),
-    check('fechaFin','fecha de fin es obligatoria').custom(isDate),
+    
+    check('start', 'Fecha de inicio obligatoria').custom(isDate),
+    check('end','fecha de fin es obligatoria').custom(isDate),
     validarCampos
 ],
 actualizarPrestamo

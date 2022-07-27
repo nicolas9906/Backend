@@ -23,9 +23,9 @@ const AgregarSchema = Schema({
     
 }); 
 
-imagneSchema.methods.setImg= function setImg (){
-    
-}
+// imagneSchema.methods.setImg= function setImg (){
+
+// }
 
 AgregarSchema.method('toJSON', function() {
     const { __v, _id, ...object } = this.toObject();

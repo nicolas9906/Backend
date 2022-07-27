@@ -1,6 +1,5 @@
 const { response } = require('express');
 const { restart } = require('nodemon');
-const prestamo = require('../models/prestamo');
 
 
 const Prestamo = require('../models/prestamo');
@@ -8,7 +7,7 @@ const Prestamo = require('../models/prestamo');
 
 const getPrestamo = async(req,res=response)=>{
     const prestamo= await Prestamo.find()
-    .populate('user','name');
+    .populate('user','nombre');
     res.json({
         ok:true,
         prestamo
@@ -50,7 +49,7 @@ const actualizarPrestamo = async(req,res = response) =>{
     try {
         const evento = await Prestamo.findById(prestamoId);
         
-        if(!prestamo){
+        if(!prestamoId){
             return res.status(404).json({
                 ok:false,
                 msg:'prestamo no existe con ese id'
@@ -58,7 +57,7 @@ const actualizarPrestamo = async(req,res = response) =>{
 
         }
 
-        if(prestamo.user.toString() !==uid){
+        if(prestamoId.user.toString() !==uid){
             return res.status(401).json({
                 ok:false,
                 msg: ' no tiene privilegios de editar este evento'
